@@ -3,21 +3,22 @@ import { BaseClient, ParamsConnection } from './base-client';
 
 
 export class MongoDb implements BaseClient {
-    private instance: MongoClient | null = null;
+    private static instance: MongoClient | null = null;
 
     getInstance(): MongoClient {
-        if (this.instance === null) {
-            throw new Error('Instance not found');
-
+        if (MongoDb.instance === null) {
+            throw new Error('Instance not found'); 
         }
-        return this.instance;
+        return MongoDb.instance;
     }
     async connection(params: ParamsConnection) {
         const { host, port, username, password, database } = params;
-        const uri = `mongodb://${username}:${password}@${host}:${port}`;
-        this.instance = new MongoClient(uri);
+        
+        const uri = `mongodb://${username}:${password}@${host}:${port}/${database}`;
+        console.log('----->', uri);
+        MongoDb.instance = new MongoClient(uri);
         try {
-            await this.instance.connect();
+            await MongoDb.instance.connect();
         } catch (error) {
             // todo: handle error
             console.error('Error on connection', error);
@@ -25,7 +26,7 @@ export class MongoDb implements BaseClient {
     }
     async disconnection() {
         try {
-            await this.instance?.close();
+            await MongoDb.instance?.close();
         } catch (error) {
             console.log('Error on disconnection', error);
         }

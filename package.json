@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon -e js -w dist ./dist/src/main.js"
+    "dev": "nodemon -e js -w dist ./dist/src/main.js",
+    "db:start:local": "docker-compose -f ./database/dev-database.yml up -d",
+    "db:start:local:log": "docker-compose -f ./database/dev-database.yml up"
+    
   },
   "keywords": [],
   "author": "",

@@ -15,11 +15,11 @@ if (process.env.NODE_ENV !== 'production') {
 (function() {
     // TODO: Implement control of environment variables
     const mongo = DatabaseFactory.getDbInstance('mongodb', {
-        host: process.env.MONGO_HOST ?? '' ,
-        port: parseInt(process.env.MONGO_PORT ?? '27017'),
-        username: process.env.MONGO_USER ?? '',
-        password: process.env.MONGO_PASS ?? '',
-        database: process.env.MONGO_DB ?? ''
+        host: process.env.API_MONGO_HOST ?? '' ,
+        port: parseInt(process.env.API_MONGO_PORT ?? '27017'),
+        username: process.env.API_MONGO_USER ?? '',
+        password: process.env.API_MONGO_PASS ?? '',
+        database: process.env.API_MONGO_DB ?? ''
     });
     const instance = mongo.getInstance() as MongoClient;
     const db = instance.db(process.env.MONGO_DB ?? '');
