@@ -1,10 +1,10 @@
 import { Pool } from 'pg';
-import { BaseClient, ParamsConnection } from "./base-client";
+import { BaseClient, ParamsConnection } from './base-client';
 
 export class PostgresDb implements BaseClient {
     private instance: Pool | null = null;
     connection(params: ParamsConnection): void {
-        const { host, port, username, password, database } = params;
+        const { host, port, username, password } = params;
         const uri = `postgresql://${username}:${password}@${host}:${port}`;
         this.instance = new Pool({
             connectionString: uri
