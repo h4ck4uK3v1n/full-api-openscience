@@ -11,13 +11,13 @@ export class DatabaseFactory {
         switch (type) {
             case 'mongodb':
                 
-                if (DatabaseFactory.mongoClient == null) {
+                if (DatabaseFactory.mongoClient === null) {
                     DatabaseFactory.mongoClient = new MongoDb();
                     DatabaseFactory.mongoClient.connection(params);
                 }
                 return DatabaseFactory.mongoClient;
             case 'postgres':
-                if (DatabaseFactory.postgresClient == null) {
+                if (DatabaseFactory.postgresClient === null) {
                     DatabaseFactory.postgresClient = new PostgresDb();
                     DatabaseFactory.postgresClient.connection(params);
                 }

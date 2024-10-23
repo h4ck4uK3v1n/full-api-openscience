@@ -3,9 +3,10 @@ import UserRoutes from './controller/routes/user-routes';
 import mongoProvider from './provider/mongo-client';
 import { DatabaseFactory } from './provider/database-factory';
 import { MongoClient } from 'mongodb';
-import dotenv from 'dotenv';
 
 if (process.env.NODE_ENV !== 'production') {
+    /*eslint-disable @typescript-eslint/no-require-imports */
+    const dotenv = require('dotenv');
     dotenv.config();
     if (dotenv.error) {
         throw dotenv.error;
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
 
     server.use('/api', UserRoutes(database.userQueries));
     server.listen(process.env.API_PORT, () => {
-        console.log(`Server is running on port ${process.env.API_PORT}`);
+        /* eslint-disable no-console */
+        console.info(`Server is running on port ${process.env.API_PORT}`);
     });
 })();

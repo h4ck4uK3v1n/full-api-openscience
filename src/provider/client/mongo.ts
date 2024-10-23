@@ -15,7 +15,6 @@ export class MongoDb implements BaseClient {
         const { host, port, username, password, database } = params;
         
         const uri = `mongodb://${username}:${password}@${host}:${port}/${database}`;
-        console.log('----->', uri);
         MongoDb.instance = new MongoClient(uri);
         try {
             await MongoDb.instance.connect();
@@ -28,7 +27,7 @@ export class MongoDb implements BaseClient {
         try {
             await MongoDb.instance?.close();
         } catch (error) {
-            console.log('Error on disconnection', error);
+            console.error('Error on disconnection', error);
         }
     }
 }

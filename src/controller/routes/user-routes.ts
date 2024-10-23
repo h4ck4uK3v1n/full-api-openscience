@@ -10,7 +10,6 @@ const UserRoutes = (database: UserWrapper) => {
     });
     userRoutes.post('/users', async (req, res) => {
         // Create a new user
-        console.log(req.body);
         const user = await database.create(req.body);
         res.status(201).json({ user });
     });

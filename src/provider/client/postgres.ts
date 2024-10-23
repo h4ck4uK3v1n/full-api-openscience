@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import { BaseClient, ParamsConnection } from "./base-client";
+import { BaseClient, ParamsConnection } from './base-client';
 
 export class PostgresDb implements BaseClient {
     private instance: Pool | null = null;

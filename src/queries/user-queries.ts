@@ -1,4 +1,4 @@
-import { UserWrapper } from "../data/interfaces/user-wrapper";
+import { UserWrapper } from '../data/interfaces/user-wrapper';
 import { Db, ObjectId } from 'mongodb';
 import { RemoveType, UserModel } from '../data/interfaces/user-model';
 
