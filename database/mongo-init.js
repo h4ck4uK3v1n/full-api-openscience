@@ -1,9 +1,9 @@
 print("Start ########################");
-db = db.getSiblingDB("api_seminario_dev");
+db = db.getSiblingDB("db-open-science");
 db.createUser({
-  user: "api_user",
-  pwd: "api1234",
-  roles: [{ role: "readWrite", db: "api_seminario_dev" }],
+  user: "admin",
+  pwd: "admin",
+  roles: [{ role: "readWrite", db: "db-open-science" }],
 });
 db.createCollection("users");
 

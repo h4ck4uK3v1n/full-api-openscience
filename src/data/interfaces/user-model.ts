@@ -3,3 +3,7 @@ export interface UserModel {
     name: string;
     email: string;
 }
+export interface RemoveType {
+    acknowledge: boolean;
+    deletedCount: number;
+}

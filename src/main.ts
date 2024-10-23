@@ -3,9 +3,9 @@ import UserRoutes from './controller/routes/user-routes';
 import mongoProvider from './provider/mongo-client';
 import { DatabaseFactory } from './provider/database-factory';
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
 
 if (process.env.NODE_ENV !== 'production') {
-    const dotenv = require('dotenv');
     dotenv.config();
     if (dotenv.error) {
         throw dotenv.error;
@@ -24,7 +24,8 @@ if (process.env.NODE_ENV !== 'production') {
     const instance = mongo.getInstance() as MongoClient;
     const db = instance.db(process.env.MONGO_DB ?? '');
     const database = mongoProvider(db);
-    server.use('/api', UserRoutes(database));
+
+    server.use('/api', UserRoutes(database.userQueries));
     server.listen(process.env.API_PORT, () => {
         console.log(`Server is running on port ${process.env.API_PORT}`);
     });
