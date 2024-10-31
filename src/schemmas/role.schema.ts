@@ -8,7 +8,7 @@ export const postSchema = z.object({
 
 export const putSchema = z.object({
     body: z.object({
-        roleType: z.string().nonempty("role is required"),
+        roleType: z.string().nonempty('role is required'),
     }),
     params: z.object({
         id: z.string(),
