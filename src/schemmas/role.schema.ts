@@ -1,12 +1,12 @@
 import {z} from 'zod';
 
-export const postSchema = z.object({
+export const roleWrapperPostSchema = z.object({
     body: z.object({
         roleType: z.string().nonempty('role is required'),
     })    
 });
 
-export const putSchema = z.object({
+export const roleWrapperPutSchema = z.object({
     body: z.object({
         roleType: z.string().nonempty('role is required'),
     }),

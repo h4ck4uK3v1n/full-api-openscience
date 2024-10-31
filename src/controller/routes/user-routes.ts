@@ -1,7 +1,7 @@
 import express from 'express';
 import { UserWrapper } from '../../data/interfaces/user-wrapper';
 import {schemaValidationMiddleware} from '../../middlewares/schemaValidator.middleware';
-import {postSchema, putSchema} from '../../schemmas/users.schema'
+import {userWrapperPostSchema, userWrapperPutSchema} from '../../schemmas/users.schema'
 
 const UserRoutes = (database: UserWrapper) => {
     const userRoutes = express.Router();
@@ -10,7 +10,7 @@ const UserRoutes = (database: UserWrapper) => {
         const userList = await database.find();
         res.status(201).json({ userList });
     });
-    userRoutes.post('/users', schemaValidationMiddleware(postSchema), async (req, res) => {
+    userRoutes.post('/users', schemaValidationMiddleware(userWrapperPostSchema), async (req, res) => {
         // Create a new user
         const user = await database.create(req.body);
         res.status(201).json({ user });
@@ -20,7 +20,7 @@ const UserRoutes = (database: UserWrapper) => {
         const user = await database.findById(req.params.id);
         res.status(200).json({ user });
     });
-    userRoutes.put('/users/:id', schemaValidationMiddleware(putSchema), async (req, res) => {
+    userRoutes.put('/users/:id', schemaValidationMiddleware(userWrapperPutSchema), async (req, res) => {
         // Update a user by id
         const user = await database.update(req.body, req.params.id);
         res.status(200).json({ user });

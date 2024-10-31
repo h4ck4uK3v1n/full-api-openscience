@@ -7,15 +7,15 @@ This is an example of how to implement it for the 'user-routes.ts' route
 Configuration implemented in 'user-routes.ts'.
 
 import {schemaValidationMiddleware} from '../../middlewares/schemaValidator.middleware';
-import {postSchema, putSchema} from '../../schemmas/users.schema'
+import {userWrapperPostSchema, userWrapperPutSchema} from '../../schemmas/users.schema'
 
 --These instances are for POST and PUT; the following syntax should be used to apply them.
 
-    userRoutes.post('/users', schemaValidationMiddleware(postSchema), async (req, res) => {
+    userRoutes.post('/users', schemaValidationMiddleware(userWrapperPostSchema), async (req, res) => {
         // Create a new user
     });
 
-    userRoutes.put('/users/:id', schemaValidationMiddleware(putSchema), async (req, res) => {
+   userRoutes.put('/users/:id', schemaValidationMiddleware(userWrapperPutSchema), async (req, res) => {
         // Update a user by id
     });
 
