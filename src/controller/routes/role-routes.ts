@@ -1,7 +1,7 @@
 import express from 'express';
 import { RoleWrapper } from '../../data/interfaces/role-wrapper';
 import {schemaValidationMiddleware} from '../../middlewares/schemaValidator.middleware';
-import {roleWrapperPostSchema, roleWrapperPutSchema} from '../../schemmas/role.schema'
+import {roleWrapperPostSchema, roleWrapperPutSchema} from '../../schemas/role.schema'
 
 const roleRoute = (database: RoleWrapper) => {
     const roleRoute = express.Router();
