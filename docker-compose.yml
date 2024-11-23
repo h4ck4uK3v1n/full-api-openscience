@@ -13,7 +13,7 @@ services:
       - app-network
   app-express:
     container_name: app-express
-    image: ghcr.io/h4ck4uk3v1n/custom-api-openscience:main
+    image: ghcr.io/h4ck4uk3v1n/full-api-openscience:master
     ports:
       - "3000:3000"
     environment:
@@ -28,6 +28,17 @@ services:
       - mongo
     links:
       - mongo
+    networks:
+      - app-network
+  app-web:
+    image: ghcr.io/h4ck4uk3v1n/full-app-web:main
+    ports:
+      - "8080:3001"
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://10.10.214.194:3000/api/
+      PORT: 3001
+    depends_on:
+      - app-express
     networks:
       - app-network
 
