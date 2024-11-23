@@ -1,0 +1,36 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:3.7
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - "./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro"
+    networks:
+      - app-network
+  app-express:
+    container_name: app-express
+    image: ghcr.io/h4ck4uk3v1n/custom-api-openscience:main
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      API_PORT: 3000
+      API_MONGO_HOST: mongo
+      API_MONGO_PORT: 27017
+      API_MONGO_USER: admin
+      API_MONGO_PASS: admin
+      API_MONGO_DB: db-open-science
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
