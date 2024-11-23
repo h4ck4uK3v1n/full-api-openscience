@@ -37,7 +37,7 @@ services:
     depends_on:
       - app-express
     environment:
-      API_BASE_URL: http://localhost:3000/api
+      NEXT_PUBLIC_API_BASE_URL: http://app-express:3000/api
       PORT: 3001
     networks:
       - frontend
