@@ -5,6 +5,7 @@ import VolumeRoutes from './controller/routes/volume-routes';
 import mongoProvider from './provider/mongo-client';
 import { DatabaseFactory } from './provider/database-factory';
 import { MongoClient } from 'mongodb';
+import UserManagementRoutes from './controller/routes/userManagement-routes';
 
 if (process.env.NODE_ENV !== 'production') {
     /*eslint-disable @typescript-eslint/no-require-imports */
@@ -29,7 +30,8 @@ if (process.env.NODE_ENV !== 'production') {
     const database = mongoProvider(db);
 
     server.use('/api', UserRoutes(database.userQueries));
-    server.use('/api', RoleRoutes(database.roleQueries));
+    server.use('/api', RoleRoutes(database.roleQueries))
+    server.use('/api', UserManagementRoutes(database.userManagementQueries));
     server.use('/api', VolumeRoutes(database.volumeQueries));
     server.listen(process.env.API_PORT, () => {
         /* eslint-disable no-console */
