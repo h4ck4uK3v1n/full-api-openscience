@@ -10,12 +10,14 @@ services:
     volumes:
       - "./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro"
     networks:
-      - app-network
+      - backend
   app-express:
     container_name: app-express
     image: ghcr.io/h4ck4uk3v1n/full-api-openscience:master
     ports:
       - "3000:3000"
+    depends_on:
+      - mongo
     environment:
       NODE_ENV: development
       API_PORT: 3000
@@ -24,24 +26,24 @@ services:
       API_MONGO_USER: admin
       API_MONGO_PASS: admin
       API_MONGO_DB: db-open-science
-    depends_on:
-      - mongo
-    links:
-      - mongo
+
     networks:
-      - app-network
+      - backend
+      - frontend
   app-web:
     image: ghcr.io/h4ck4uk3v1n/full-app-web:main
     ports:
       - "8080:3001"
-    environment:
-      NEXT_PUBLIC_API_BASE_URL: http://10.10.214.194:3000/api/
-      PORT: 3001
     depends_on:
       - app-express
+    environment:
+      API_BASE_URL: http://app-express:3000/api
+      PORT: 3001
     networks:
-      - app-network
+      - frontend
 
 networks:
-  app-network:
+  backend:
+    driver: bridge
+  frontend:
     driver: bridge
