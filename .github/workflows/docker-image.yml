@@ -12,18 +12,8 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 jobs:
-  get_alld_data:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Get all data
-        run: |
-          echo "Get all data"
-          echo hostname -I
-
   build:
     runs-on: ubuntu-latest
-    needs: get_alld_data
     permissions:
       contents: write
       packages: write
