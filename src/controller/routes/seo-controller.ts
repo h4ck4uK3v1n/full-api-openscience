@@ -1,6 +1,6 @@
 import express from 'express';
 import { SEOWrapper } from '../../data/interfaces/seo-wrapper';
-import { validateSEOFields } from '../../middleware/validateSEOFields'
+import { validateSEOFields } from '../../middlewares/validateSEOFields'
 
 export const SEORoutes = (database: SEOWrapper) => {
     const seoRoutes = express.Router();
