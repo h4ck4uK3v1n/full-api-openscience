@@ -1,5 +1,6 @@
 import server from './server';
 import UserRoutes from './controller/routes/user-routes';
+import { SEORoutes } from './controller/routes/seo-controller';
 import RoleRoutes from './controller/routes/role-routes';
 import mongoProvider from './provider/mongo-client';
 import { DatabaseFactory } from './provider/database-factory';
@@ -29,6 +30,7 @@ if (process.env.NODE_ENV !== 'production') {
 
     server.use('/api', UserRoutes(database.userQueries));
     server.use('/api', RoleRoutes(database.roleQueries))
+    server.use('/api', SEORoutes(database.seoQueries));
     server.listen(process.env.API_PORT, () => {
         /* eslint-disable no-console */
         console.info(`Server is running on port ${process.env.API_PORT}`);
