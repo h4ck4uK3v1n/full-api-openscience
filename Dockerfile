@@ -2,17 +2,16 @@ FROM node:20.18.0-alpine
 
 WORKDIR /app
 
-COPY yarn.lock /app
-
 COPY package.json /app
 
-RUN yarn install
+COPY yarn.lock /app
 
 COPY . /app
 
+RUN yarn install --frozen-lockfile
+
 RUN yarn build
 
-EXPOSE $API_PORT
+EXPOSE 3000
 
-
-CMD ["yarn", "dev"]
+CMD ["node", "./dist/main.js"]
