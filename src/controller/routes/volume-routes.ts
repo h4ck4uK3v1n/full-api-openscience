@@ -48,7 +48,7 @@ const VolumeRoutes = (database: VolumeWrapper) => {
             }
             return res.status(201).json({
                 volume,
-                imageMessage: 'Imagen cargada exitosamente.',
+                imageMessage: 'Image uploaded successfully.',
                 filePath: `/uploads/${req.file.filename}`,
             });
         } catch (error) {
