@@ -1,7 +1,7 @@
 import { FileFilterCallback } from 'multer';
 import { FILE_TYPES } from '../utils/constants';
 
-export function fileValidator(req: Express.Request, file: Express.Multer.File, cb: FileFilterCallback) {
+export function fileValidator(req: Express.Request, file: Express.Multer.File, cb: FileFilterCallback): void {
     const fileTypes = FILE_TYPES;
 
     if (fileTypes.includes(file.mimetype)) {
