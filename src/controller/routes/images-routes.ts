@@ -13,7 +13,7 @@ const ImageRouter = () => {
 
     router.post(
         '/upload',
-        uploader.single('image'),
+        uploader.single('image') as unknown as express.RequestHandler,
         (req, res) => {
             if (!req.file) {
                 return res.status(StatusCodes.BAD_REQUEST).json({ 

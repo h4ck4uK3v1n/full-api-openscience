@@ -7,7 +7,7 @@ interface MulterConfigProps {
     bucketName: string;
 }
 
-export function bucket({ storageType, bucketName }: MulterConfigProps) {
+export function bucket({ storageType, bucketName }: MulterConfigProps): multer.StorageEngine {
     switch (storageType) {
         case 'disk':
             return multer.diskStorage({
@@ -24,6 +24,8 @@ export function bucket({ storageType, bucketName }: MulterConfigProps) {
             })
         case 'memory':
             return multer.memoryStorage();
+        default:
+                throw new Error('Invalid storage type');
     }
 }
 

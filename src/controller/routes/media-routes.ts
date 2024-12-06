@@ -25,7 +25,7 @@ const VolumeRoutes = (database: VolumeWrapper) => {
         }
     })
 
-    volumeRoutes.post('/volumes', uploader.single('file'), schemaValidationMiddleware(volumeWrapperPostSchema), async (req, res) => {
+    volumeRoutes.post('/volumes', uploader.single('file')as unknown as express.RequestHandler, schemaValidationMiddleware(volumeWrapperPostSchema), async (req, res) => {
         try {
             if (!req.file) {
                 return res.status(400).json({ error: 'No se subió ninguna imagen.' });
