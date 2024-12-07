@@ -1,5 +1,6 @@
 import server from './server';
 import UserRoutes from './controller/routes/user-routes';
+import { SEORoutes } from './controller/routes/seo-controller';
 import RoleRoutes from './controller/routes/role-routes';
 import VolumeRoutes from './controller/routes/volume-routes';
 import mongoProvider from './provider/mongo-client';
@@ -17,8 +18,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 (function () {
+(function () {
     // TODO: Implement control of environment variables
     const mongo = DatabaseFactory.getDbInstance('mongodb', {
+        host: process.env.API_MONGO_HOST ?? '',
         host: process.env.API_MONGO_HOST ?? '',
         port: parseInt(process.env.API_MONGO_PORT ?? '27017'),
         username: process.env.API_MONGO_USER ?? '',
