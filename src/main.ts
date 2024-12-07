@@ -1,12 +1,12 @@
 import server from './server';
 import UserRoutes from './controller/routes/user-routes';
-import { SEORoutes } from './controller/routes/seo-controller';
 import RoleRoutes from './controller/routes/role-routes';
 import VolumeRoutes from './controller/routes/volume-routes';
 import mongoProvider from './provider/mongo-client';
 import { DatabaseFactory } from './provider/database-factory';
 import { MongoClient } from 'mongodb';
 import UserManagementRoutes from './controller/routes/userManagement-routes';
+import ArticlesRouter from './controller/routes/article-routes';
 
 if (process.env.NODE_ENV !== 'production') {
     /*eslint-disable @typescript-eslint/no-require-imports */
@@ -18,10 +18,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 (function () {
-(function () {
     // TODO: Implement control of environment variables
     const mongo = DatabaseFactory.getDbInstance('mongodb', {
-        host: process.env.API_MONGO_HOST ?? '',
         host: process.env.API_MONGO_HOST ?? '',
         port: parseInt(process.env.API_MONGO_PORT ?? '27017'),
         username: process.env.API_MONGO_USER ?? '',
@@ -36,6 +34,7 @@ if (process.env.NODE_ENV !== 'production') {
     server.use('/api', RoleRoutes(database.roleQueries))
     server.use('/api', UserManagementRoutes(database.userManagementQueries));
     server.use('/api', VolumeRoutes(database.volumeQueries));
+    server.use('/api', ArticlesRouter(database.articleQueries));
     server.listen(process.env.API_PORT, () => {
         /* eslint-disable no-console */
         console.info(`Server is running on port ${process.env.API_PORT}`);
